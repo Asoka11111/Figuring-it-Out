@@ -1,0 +1,173 @@
+//Ugonna (Akosa) Erinne
+//I solved more of these problems, but I am forced to exclude them from this file because I implemented my solutions in Python
+import java.lang.Math.*; 
+public class PSET
+{
+    public int Problem1(int UB)
+    //Finds the sum of all multiples of 3 or 5 below the value of the parameter
+    {
+        int sum=0;
+        for(int x=1; x<UB; x++){
+            if(x%3==0||x%5==0){sum+=x;}}
+        return sum;
+    }
+
+
+    public int Problem2(int UB)
+    //Finds the sum of even-valued terms in the Fibonacci sequence whose values do not exceed the value of the parameter
+    {
+        int n1=1; int n2=2; int n3=0; int sum=0;
+        while(n3<=UB){
+            n3=n1+n2; n1=n2; n2=n3;
+            if(n3%2==0){sum+=n3;}}
+        return sum+2;
+    }
+
+
+    public long Problem3 (long UB)
+    //Finds the largest prime factor of the value of the parameter
+    {
+        long max=0;
+        for(long x=2; x<=(long)Math.sqrt(UB);x++){
+            if(UB%x==0){
+                int count=0;
+                for(long y=2; y<(long)Math.sqrt(x); y++){
+                    if(x%y==0){count++;}
+                }
+                if(count==0){max=x;}
+            }
+            else{continue;}
+        }
+        return max;
+    }
+
+
+    public boolean palindromeTest(int chosenOne)
+    //Helper method for method below; tests to see if values received from PSET.Problem4() are palindromes
+    {
+        int[] numHolder = new int[6]; int a=0; int original=chosenOne;
+        while(chosenOne>0){
+        numHolder[a]=chosenOne%10; 
+        chosenOne/=10; 
+        a++;}
+        if(original<100000 || original%10==0){return false;}
+        else{
+            for(int y=0; y<=2; y++){
+                if(numHolder[y]!=numHolder[numHolder.length-1-y]){return false;}}}
+        return true;
+    }
+
+
+    public int Problem4()
+    //Finds the larges palindrome made from the product of two 3-digit integers
+    {
+        int product=0;
+        /*for(int x=101; x<1000; x++){
+        int squared=x*x;
+        if(palindromeTest(squared)){product=squared;}}*/
+        for(int x=101; x<1000; x++){
+            for(int z=101;z<1000;z++){
+                int tester = x * z;
+                if(palindromeTest(tester) && tester>product){product=tester;}}
+        }
+        return product;
+    }
+
+
+    public boolean getFactored(int chosenOne)
+    //Helper method for method below; determines if the value received from PSET.Problem5() is evenly divisible by integers in the range [1,20]
+    {
+        for(int b=2; b<21; b++){
+            if(chosenOne%b!=0){return false;}}
+        return true;
+    }
+
+
+    public int Problem5()
+    //Finds the smallest positive integer that returns true for PSET.getFactored()
+    {
+        int ultraComposite=2520;
+        for(int x=2520; x<Integer.MAX_VALUE; x++){
+            if(getFactored(x)){ultraComposite=x;break;}
+        }
+        return ultraComposite;
+    }
+
+
+    public int Problem6(int UB)
+    //Finds the difference between the sum of the squares of integers in the range [1,(value from paramater)] and the square 
+    //of the sum of integers in the range[1,(value from parameter)]
+    {
+        //READ the instructions next time [insert forehead slap].
+        int sum=0; int sum2=0;
+        for(int c=1; c<=UB; c++){sum+=(c*c);}
+        for(int d=1;d<=UB;d++){sum2+=d;}
+        int goldenDiff=(sum2*sum2)-sum;
+        return goldenDiff;
+    }
+
+
+    public long Problem7(long UB)
+    //Finds the (value from parameter)th prime number
+    {
+        long primeCounter=1; long goldenPrime=2;
+        for(long x=2; primeCounter<=UB; x++){
+            long count=0;
+            for(long y=2; y<=Math.sqrt(x); y++){
+                if(x%y==0){count++;break;}
+            }
+            if(count==0){goldenPrime=x; primeCounter++;}
+        }
+        return goldenPrime;
+    }
+
+
+    public long Problem10(long UB)
+    //Finds the sum of all prime numbers below the value of the parameter
+    {
+        long sum=0;
+        for(long x=2; x<=UB; x++){
+            long count=0;
+            for(long y=2; y<=Math.sqrt(x); y++){
+                if(x%y==0){count++;break;}
+            }
+            if(count==0){sum+=x;}
+        }
+        return sum;
+    }
+
+
+  
+
+    public long Problem12(long UB)
+    //Triangle numbers are calculated by adding natural numbers (ex. the 7th triangle number is 1+2+3+4+5+6+7=28)
+    //This method finds the value of the first triangle number to have over (value passed as parameter) divisors
+    {
+        long sum=0; long triangle=1;
+        for(long x=1;x<Long.MAX_VALUE;x++){
+            int count=0; sum+=triangle; triangle++;
+            for(long y=1;y<=Math.sqrt(sum);y++){
+                if(sum%y==0){count++;}
+                if(count>UB/2){return sum;}
+            }
+        }
+        return 0;
+    }
+
+
+    public static void main(String []args)
+    {
+        PSET answer = new PSET();
+        /*
+        System.out.println(answer.Problem1(1000));
+        System.out.println(answer.Problem2(4000000));
+        System.out.println(answer.Problem3(600851475143L));
+        System.out.println(answer.Problem4());
+        System.out.println(answer.Problem5());
+        System.out.println(answer.Problem6(100));
+        System.out.println(answer.Problem7(10001));
+        System.out.println(answer.Problem10(2000000));
+        System.out.println(answer.Problem12(500));
+        */
+    }
+}
