@@ -1,4 +1,4 @@
-Figuring-it-Out
+Project-Euler-And-Similar-Projects
 ===============
 
-Just want to learn how to collaborate on projects
+Intro level projects
